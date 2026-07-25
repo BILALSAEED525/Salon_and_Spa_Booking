@@ -147,6 +147,33 @@ export default function GlobalStyles() {
         .slots-col { border-left: none; padding-left: 0; border-top: 1px solid #F0EDE8; padding-top: 20px; }
         .calendar-col { width: 100%; }
       }
+        .nav-burger { display: none; }
+      .nav-mobile-panel { display: none; }
+
+      @media (max-width: 780px) {
+        .nav-links-desktop, .navbar-right-desktop { display: none !important; }
+        .nav-burger { display: flex !important; align-items: center; justify-content: center; }
+        .nav-mobile-panel {
+          display: flex; flex-direction: column;
+          position: absolute; top: 64px; left: 0; right: 0;
+          background: #fff; border-bottom: 1px solid var(--border);
+          padding: 12px 20px 20px; box-shadow: 0 12px 24px rgba(0,0,0,.06);
+          z-index: 49;
+        }
+        .nav-mobile-link {
+          background: none; border: none; text-align: left;
+          font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 500;
+          color: var(--ink); padding: 12px 4px; cursor: pointer;
+          display: flex; align-items: center; border-bottom: 1px solid #F5F5F4;
+        }
+        .nav-mobile-link.active { color: var(--gold-d); font-weight: 600; }
+        .nav-mobile-divider { height: 1px; background: var(--border); margin: 6px 0; }
+      }
+
+      @media (max-width: 640px) {
+        .nav-links { gap: 14px; }
+        .nav-link { font-size: 11px; }
+      
       @media (max-width: 640px) {
         .nav-links { gap: 14px; }
         .nav-link { font-size: 11px; }
