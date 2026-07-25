@@ -137,6 +137,16 @@ export default function GlobalStyles() {
       /* ── Barber portal nav tab label ── */
       @media (max-width: 700px) {
         .bp-tab-label { display: none; }
+        .bp-portal-label, .bp-customer-view-label, .bp-barber-name { display: none; }
+      }
+
+      /* ── Barber portal responsive layout ── */
+      @media (max-width: 860px) {
+        .profile-grid { grid-template-columns: 1fr !important; }
+        .overview-grid { grid-template-columns: 1fr !important; }
+      }
+      @media (max-width: 560px) {
+        .profile-form-grid { grid-template-columns: 1fr !important; }
       }
 
       /* ── Responsive ── */
