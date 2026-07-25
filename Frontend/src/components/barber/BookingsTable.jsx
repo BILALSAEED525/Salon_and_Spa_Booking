@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { minsToLabel, fmtLong } from "../../utils/helpers";
 import { updateBookingStatus } from "../../api/client";
+
 /* ══════════════════════════════════════════════════════════════════════════
    BARBER DASHBOARD — Bookings Table
 ══════════════════════════════════════════════════════════════════════════ */
@@ -13,7 +14,6 @@ const STATUS_STYLES = {
 
 const FILTERS = ["All", "Pending", "Confirmed", "Completed", "Cancelled"];
 
-/* action buttons available per status */
 const ACTIONS = {
   Pending: [
     { label: "Confirm", next: "Confirmed", icon: "ti-check", color: "#4F7A52" },
@@ -112,7 +112,6 @@ export default function BookingsTable({ bookings, onStatusChange }) {
     return true;
   });
 
-  /* sort: newest date first */
   const sorted = [...filtered].sort((a, b) => {
     if (!a.date || !b.date) return 0;
     return new Date(b.date) - new Date(a.date);
@@ -130,8 +129,8 @@ export default function BookingsTable({ bookings, onStatusChange }) {
 
   return (
     <div>
-      {/* toolbar */}
       <div
+        className="bt-toolbar"
         style={{
           display: "flex",
           gap: 12,
@@ -140,7 +139,6 @@ export default function BookingsTable({ bookings, onStatusChange }) {
           alignItems: "center",
         }}
       >
-        {/* search */}
         <div style={{ position: "relative", flex: 1, minWidth: 180 }}>
           <i
             className="ti ti-search"
@@ -174,7 +172,6 @@ export default function BookingsTable({ bookings, onStatusChange }) {
           />
         </div>
 
-        {/* filter pills */}
         <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
           {FILTERS.map((f) => (
             <button
@@ -199,13 +196,11 @@ export default function BookingsTable({ bookings, onStatusChange }) {
         </div>
       </div>
 
-      {/* count */}
       <p style={{ fontSize: 12, color: "var(--muted)", marginBottom: 12 }}>
         {sorted.length} {sorted.length === 1 ? "booking" : "bookings"}
         {filter !== "All" ? ` · ${filter}` : ""}
       </p>
 
-      {/* table */}
       {sorted.length === 0 ? (
         <div
           style={{
@@ -232,6 +227,7 @@ export default function BookingsTable({ bookings, onStatusChange }) {
             return (
               <div
                 key={b.id}
+                className="bt-card"
                 style={{
                   background: "#fff",
                   border: "1px solid var(--border)",
@@ -244,7 +240,6 @@ export default function BookingsTable({ bookings, onStatusChange }) {
                   flexWrap: "wrap",
                 }}
               >
-                {/* left: customer + service + datetime */}
                 <div
                   style={{
                     display: "flex",
@@ -254,7 +249,6 @@ export default function BookingsTable({ bookings, onStatusChange }) {
                     minWidth: 200,
                   }}
                 >
-                  {/* customer avatar */}
                   <div
                     style={{
                       width: 40,
@@ -296,8 +290,8 @@ export default function BookingsTable({ bookings, onStatusChange }) {
                   </div>
                 </div>
 
-                {/* right: status + actions */}
                 <div
+                  className="bt-card-actions"
                   style={{
                     display: "flex",
                     alignItems: "center",

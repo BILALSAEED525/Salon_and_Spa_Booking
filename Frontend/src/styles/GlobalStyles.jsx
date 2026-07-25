@@ -179,6 +179,11 @@ export default function GlobalStyles() {
         .nav-mobile-link.active { color: var(--gold-d); font-weight: 600; }
         .nav-mobile-divider { height: 1px; background: var(--border); margin: 6px 0; }
       }
+        @media (max-width: 640px) {
+        .bt-toolbar { flex-direction: column; align-items: stretch !important; }
+        .bt-card { flex-direction: column; align-items: flex-start !important; }
+        .bt-card-actions { width: 100%; justify-content: flex-start !important; padding-top: 8px; border-top: 1px solid #F5F5F4; margin-top: 4px; }
+      }
 
       @media (max-width: 640px) {
         .nav-links { gap: 14px; }
