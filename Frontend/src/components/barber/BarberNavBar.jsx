@@ -17,6 +17,7 @@ export default function BarberNavBar({
 }) {
   return (
     <nav
+      className="bp-nav"
       style={{
         background: "var(--ink)",
         borderBottom: "1px solid rgba(255,255,255,.08)",

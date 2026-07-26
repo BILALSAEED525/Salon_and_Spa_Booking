@@ -159,7 +159,10 @@ function OverviewTab({ barber, bookings, onStatusChange }) {
   return (
     <div>
       <StatsCards bookings={bookings} />
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+      <div
+        className="overview-grid"
+        style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}
+      >
         <TodaySchedule bookings={bookings} />
         {/* recent activity */}
         <div
@@ -293,6 +296,7 @@ function ProfileTab({ barber, onSave, categories }) {
 
   return (
     <div
+      className="profile-grid"
       style={{
         display: "grid",
         gridTemplateColumns: "300px 1fr",
@@ -468,6 +472,7 @@ function ProfileTab({ barber, onSave, categories }) {
         </div>
 
         <div
+          className="profile-form-grid"
           style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}
         >
           <Input
@@ -700,6 +705,7 @@ export default function BarberDashboard({
       />
 
       <div
+        className="bp-page"
         style={{ maxWidth: 1100, margin: "0 auto", padding: "28px 20px 60px" }}
       >
         {/* welcome line */}

@@ -134,31 +134,54 @@ export default function GlobalStyles() {
       .field textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
       .field-error { font-size: 12px; color: var(--danger); margin-top: 2px; }
 
-      /* ── Barber portal nav tab label ── */
-      @media (max-width: 700px) {
-        .bp-tab-label { display: none; }
-        .bp-portal-label, .bp-customer-view-label, .bp-barber-name { display: none; }
+      /* ══════════════════════════════════════════════════════════════════
+         RESPONSIVE
+         Ordered widest breakpoint first so narrower ones can override.
+      ══════════════════════════════════════════════════════════════════ */
+
+      /* ── Barber portal ── */
+      @media (max-width: 860px) {
+        .overview-grid { grid-template-columns: 1fr !important; }
+        .profile-grid  { grid-template-columns: 1fr !important; }
       }
 
-      /* ── Barber portal responsive layout ── */
-      @media (max-width: 860px) {
-        .profile-grid { grid-template-columns: 1fr !important; }
-        .overview-grid { grid-template-columns: 1fr !important; }
+      @media (max-width: 700px) {
+        /* collapse the dark nav to icons only */
+        .bp-tab-label,
+        .bp-portal-label,
+        .bp-customer-view-label,
+        .bp-barber-name { display: none; }
+        .bp-nav  { padding: 0 12px !important; }
+        .bp-page { padding: 20px 14px 48px !important; }
       }
+
+      @media (max-width: 640px) {
+        .bt-toolbar { flex-direction: column; align-items: stretch !important; }
+        .bt-card { flex-direction: column; align-items: flex-start !important; }
+        .bt-card-actions {
+          width: 100%; justify-content: flex-start !important;
+          padding-top: 8px; border-top: 1px solid #F5F5F4; margin-top: 4px;
+        }
+      }
+
       @media (max-width: 560px) {
         .profile-form-grid { grid-template-columns: 1fr !important; }
       }
 
-      /* ── Responsive ── */
+      /* ── Customer portal ── */
+      .nav-burger { display: none; }
+      .nav-mobile-panel { display: none; }
+
       @media (max-width: 860px) {
         .booking-layout { flex-direction: column; }
         .booking-sidebar-wrap { width: 100%; position: static; order: -1; }
         .datetime-grid { flex-direction: column; }
-        .slots-col { border-left: none; padding-left: 0; border-top: 1px solid #F0EDE8; padding-top: 20px; }
+        .slots-col {
+          border-left: none; padding-left: 0;
+          border-top: 1px solid #F0EDE8; padding-top: 20px;
+        }
         .calendar-col { width: 100%; }
       }
-        .nav-burger { display: none; }
-      .nav-mobile-panel { display: none; }
 
       @media (max-width: 780px) {
         .nav-links-desktop, .navbar-right-desktop { display: none !important; }
@@ -179,16 +202,7 @@ export default function GlobalStyles() {
         .nav-mobile-link.active { color: var(--gold-d); font-weight: 600; }
         .nav-mobile-divider { height: 1px; background: var(--border); margin: 6px 0; }
       }
-        @media (max-width: 640px) {
-        .bt-toolbar { flex-direction: column; align-items: stretch !important; }
-        .bt-card { flex-direction: column; align-items: flex-start !important; }
-        .bt-card-actions { width: 100%; justify-content: flex-start !important; padding-top: 8px; border-top: 1px solid #F5F5F4; margin-top: 4px; }
-      }
 
-      @media (max-width: 640px) {
-        .nav-links { gap: 14px; }
-        .nav-link { font-size: 11px; }
-      
       @media (max-width: 640px) {
         .nav-links { gap: 14px; }
         .nav-link { font-size: 11px; }
@@ -196,6 +210,7 @@ export default function GlobalStyles() {
         .cat-tabs { gap: 8px; }
         .cat-tab { min-width: 90px; padding: 14px 8px; }
         .auth-card { padding: 28px 20px; }
+        .slot-grid { grid-template-columns: 1fr; }
       }
     `}</style>
   );
