@@ -4,6 +4,7 @@ from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password, check_password
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+import requests
 
 from rest_framework import viewsets
 from .models import ServiceCategory, Service, Specialist, SpecialistService, Customer, Booking
@@ -41,6 +42,28 @@ class CustomerViewSet(viewsets.ModelViewSet):
 class BookingViewSet(viewsets.ModelViewSet):
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
+def send_verification_email(full_name, email, token):
+    verify_url = f"{config('BACKEND_URL', default='http://127.0.0.1:8000')}/api/auth/verify/{token}/"
+    payload = {
+        "sender": {"name": "LUXE Salon & Spa", "email": config('DEFAULT_FROM_EMAIL')},
+        "to": [{"email": email, "name": full_name}],
+        "subject": "Verify your LUXE account",
+        "htmlContent": (
+            f"<p>Hi {full_name},</p>"
+            f"<p>Please verify your email by clicking this link:</p>"
+            f"<p><a href='{verify_url}'>{verify_url}</a></p>"
+            f"<p>If you did not create this account, you can ignore this email.</p>"
+        ),
+    }
+    headers = {
+        "accept": "application/json",
+        "api-key": config('BREVO_API_KEY'),
+        "content-type": "application/json",
+    }
+    try:
+        requests.post("https://api.brevo.com/v3/smtp/email", json=payload, headers=headers, timeout=10)
+    except requests.RequestException as e:
+        print(f"Failed to send verification email: {e}")
 @api_view(['POST'])
 def customer_register(request):
     data = request.data
@@ -64,13 +87,7 @@ def customer_register(request):
         verification_token=token,
     )
 
-    verify_url = f"http://127.0.0.1:8000/api/auth/verify/{token}/"
-    send_mail(
-        'Verify your LUXE account',
-        f'Hi {full_name},\n\nPlease verify your email by clicking this link:\n{verify_url}\n\nIf you did not create this account, you can ignore this email.',
-        None,
-        [email],
-    )
+    send_verification_email(full_name, email, token)
 
     return Response(CustomerSerializer(customer).data, status=201)
 
