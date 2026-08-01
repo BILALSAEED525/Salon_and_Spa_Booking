@@ -1,10 +1,12 @@
+import requests
+from decouple import config
 from django.shortcuts import render
 import secrets
 from django.core.mail import send_mail
 from django.contrib.auth.hashers import make_password, check_password
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-import requests
+
 
 from rest_framework import viewsets
 from .models import ServiceCategory, Service, Specialist, SpecialistService, Customer, Booking
